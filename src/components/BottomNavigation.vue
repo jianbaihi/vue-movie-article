@@ -1,17 +1,27 @@
 <template>
   <div class="nav-bottom">
-    <a href="/" class="router-link-exact-active">
+    <a href="/" :class="{active:props.show}" >
       <i class="iconfont"></i>
       <p>阅读</p>
     </a>
-    <a href="/movieList" class="router-link-exact-active">
+    <a href="/movieList" :class="{active:!props.show}">
       <i class="iconfont"></i>
       <p>电影</p>
     </a>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue"
+import {useRouter} from "vue-router"
+const $router = useRouter()
+const props = defineProps({
+  show: {
+    type: Boolean,
+  }
+})
+
+</script>
 
 <style scoped>
 .nav-bottom {
@@ -27,7 +37,7 @@
   text-align: center;
 }
 
-a {
+.nav-bottom div {
   text-decoration: none;
   color: #333;
   
@@ -35,8 +45,9 @@ a {
 p{
     margin: 0;
 }
-.router-link-exact-active {
+.active {
     color: #38f;
     border-bottom: .0133333333rem solid #3388ff;
+    cursor: pointer;
 }
 </style>

@@ -1,31 +1,40 @@
 <template>
   <div class="item">
     <p class="title">
-      <span>豆瓣Top250</span>
-      <a href="/vue-movie-article/#/movieDetail?id=top250" class="">
-        <span>更多&gt;</span></a>
+      <span><slot></slot></span>
+      <div @click="enterDetail()" class="more">更多&gt;</div>
     </p>
     <div class="movie-content">
-      <div class="item">
-        <img src="https://s1.ax1x.com/2023/07/11/pCWWdSI.png" alt="" />
-        <p>肖申克的赎</p>
-        <p>评分:9.7</p>
-      </div>
-      <div class="item">
-        <img src="https://s1.ax1x.com/2023/07/11/pCWWs0S.png" alt="" />
-        <p>霸王别姬</p>
-        <p>评分:9.6</p>
-      </div>
-      <div class="item">
-        <img src="https://s1.ax1x.com/2023/07/11/pCWWh60.png" alt="" />
-        <p>阿甘正传</p>
-        <p>评分:9.5</p>
+      <div 
+      class="item" 
+      v-for="movie in movies.movies" 
+      :key="movie.id"
+      >
+        <img :src=movie.pic  alt="" />
+        <p>{{ movie.title }}</p>
+        <p>评分:{{ movie.raiting }}</p>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref,onMounted  } from 'vue';
+import { useRouter } from 'vue-router';
+const $router = useRouter();
+
+const enterDetail = () => {
+  $router.push({name:'movieDetail',query:{id:props.movies.title,name:props.movies.name}})
+
+}
+
+
+const props = defineProps({
+  movies:{
+    type:Object,
+  }
+})
+</script>
 
 <style scoped>
     .item {
@@ -39,10 +48,12 @@
     align-items: center;
     padding: 0.2666666667rem;
     }
-    .title a {
+    .title div {
     text-decoration: none;
     color: #333;
+    cursor: pointer;
     }
+    
     .movie-content {
     display: flex;
     justify-content: space-between;

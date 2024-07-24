@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <BottomNavigation />
+  <BottomNavigation :show="true" />
 </template>
 
 <script setup>

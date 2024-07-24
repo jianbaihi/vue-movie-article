@@ -1,12 +1,12 @@
 <template>
-    <div id="app">
+  <div>
       <!-- keep-alive 可以让滚动条停留在记录值的位置 -->
     <router-view v-slot="{ Component }">
-      <keep-alive exclude="ArticleDetail,movieDetail">
+      <keep-alive exclude="ArticleDetail,MovieDetail">
           <component :is="Component" />
       </keep-alive>
     </router-view>
-    </div>
+  </div>
 </template>
 
 <script setup>
